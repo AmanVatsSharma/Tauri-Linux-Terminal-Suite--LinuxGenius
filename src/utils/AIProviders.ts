@@ -25,18 +25,20 @@ export class AIProviderFactory {
         });
       
       case 'anthropic':
-        return new ChatAnthropic({
-          anthropicApiKey: apiKey,
-          modelName: model || 'claude-3-haiku-20240307',
-          temperature,
-        });
+        throw new Error('Anthropic provider not available in current build. Please install @langchain/anthropic');
+        // return new ChatAnthropic({
+        //   anthropicApiKey: apiKey,
+        //   modelName: model || 'claude-3-haiku-20240307',
+        //   temperature,
+        // });
       
       case 'gemini':
-        return new ChatGoogleGenerativeAI({
-          apiKey,
-          modelName: model || 'gemini-pro',
-          temperature,
-        });
+        throw new Error('Google Gemini provider not available in current build. Please install @langchain/google-genai');
+        // return new ChatGoogleGenerativeAI({
+        //   apiKey,
+        //   modelName: model || 'gemini-pro',
+        //   temperature,
+        // });
       
       default:
         throw new Error(`Unsupported AI provider: ${provider}`);
