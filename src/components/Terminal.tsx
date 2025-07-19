@@ -138,48 +138,32 @@ const Terminal = ({ onOutput }: TerminalProps) => {
       const command = parts[0];
       const args = parts.slice(1);
 
-      // Execute the command directly using the process plugin
+      // Execute the command directly using Rust-based command execution
       try {
-        const process = await Command.create(command, args);
-        const output = await process.execute();
-        
-        if (output.stdout) {
-          terminal.writeln(output.stdout);
-          if (onOutput) onOutput(output.stdout, cmd);
-        }
-        
-        if (output.stderr) {
-          terminal.writeln(`\x1b[31m${output.stderr}\x1b[0m`); // Red color for errors
-          if (onOutput) onOutput(output.stderr, cmd);
-        }
-      } catch (processError) {
-        // Fall back to our Rust-based command execution if process plugin fails
-        try {
-          const result = await invoke<{
-            stdout: string;
-            stderr: string;
-            success: boolean;
-          }>('execute_command', {
-            command,
-            args,
-          });
+        const result = await invoke<{
+          stdout: string;
+          stderr: string;
+          success: boolean;
+        }>('execute_command', {
+          command,
+          args,
+        });
 
-          if (result.stdout) {
-            terminal.writeln(result.stdout);
-            if (onOutput) onOutput(result.stdout, cmd);
-          }
-          
-          if (result.stderr) {
-            terminal.writeln(`\x1b[31m${result.stderr}\x1b[0m`); // Red color for errors
-            if (onOutput) onOutput(result.stderr, cmd);
-          }
-          
-          if (!result.success) {
-            terminal.writeln(`\x1b[31mCommand failed with non-zero exit code\x1b[0m`);
-          }
-        } catch (rustError) {
-          terminal.writeln(`\x1b[31mError executing command: ${rustError}\x1b[0m`);
+        if (result.stdout) {
+          terminal.writeln(result.stdout);
+          if (onOutput) onOutput(result.stdout, cmd);
         }
+        
+        if (result.stderr) {
+          terminal.writeln(`\x1b[31m${result.stderr}\x1b[0m`); // Red color for errors
+          if (onOutput) onOutput(result.stderr, cmd);
+        }
+        
+        if (!result.success) {
+          terminal.writeln(`\x1b[31mCommand failed with non-zero exit code\x1b[0m`);
+        }
+      } catch (error) {
+        terminal.writeln(`\x1b[31mError executing command: ${error}\x1b[0m`);
       }
     } catch (error) {
       terminal.writeln(`\x1b[31mError: ${error}\x1b[0m`);
