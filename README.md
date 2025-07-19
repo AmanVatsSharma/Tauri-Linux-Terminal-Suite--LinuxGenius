@@ -188,7 +188,7 @@ df -h                     # Disk usage with storage recommendations
 
 ---
 
-## 📁 **Project Structure**
+## 📁 **Project Structure & Scripts**
 
 ```
 linux-terminal-suite/
@@ -206,10 +206,28 @@ linux-terminal-suite/
 │   │   ├── 📋 lib.rs               # Core functions
 │   │   └── 🚀 main.rs              # Entry point
 │   └── ⚙️ Cargo.toml               # Rust dependencies
+├── 📁 scripts/                      # Build & Install Scripts
+│   ├── 🏗️ build.sh                # Automated build script
+│   ├── 📦 install.sh               # System installation
+│   └── 🗑️ uninstall.sh            # Clean removal
 ├── 📋 package.json                  # Node.js config
 ├── ⚙️ vite.config.ts               # Build configuration
-└── 📖 README.md                     # This documentation
+├── 📖 README.md                     # This documentation
+├── 📖 BUILD_AND_INSTALL.md          # Comprehensive build guide
+└── 📖 QUICK_START.md                # Quick start guide
 ```
+
+### **📜 Available Scripts**
+
+| Script | Description | Usage |
+|--------|-------------|-------|
+| `npm run dev` | Development server | `npm run dev` |
+| `npm run build` | Build frontend only | `npm run build` |
+| `npm run tauri dev` | Full Tauri development | `npm run tauri dev` |
+| `npm run tauri build` | Production build | `npm run tauri build` |
+| `./scripts/build.sh` | **Automated build** | `./scripts/build.sh` |
+| `./scripts/install.sh` | **System installation** | `./scripts/install.sh` |
+| `./scripts/uninstall.sh` | **Clean removal** | `./scripts/uninstall.sh` |
 
 ---
 
