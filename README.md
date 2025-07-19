@@ -97,45 +97,69 @@ Development:
 
 ## 🛠️ **Installation & Setup**
 
-### **Prerequisites**
+### **🚀 Quick Install (Recommended for Users)**
 
-**Linux System Dependencies:**
+**Option 1: Download Pre-built Package**
 ```bash
-sudo apt update
-sudo apt install -y \
-  libwebkit2gtk-4.1-dev \
-  libgtk-3-dev \
-  libayatana-appindicator3-dev \
-  librsvg2-dev \
-  build-essential \
-  curl
+# Download AppImage (works on any Linux)
+wget [release-url]/linux-terminal-suite_0.1.0_amd64.AppImage
+chmod +x linux-terminal-suite_0.1.0_amd64.AppImage
+./linux-terminal-suite_0.1.0_amd64.AppImage
 ```
 
-**Required Tools:**
-- Node.js v18+ 
-- Rust (latest stable)
-- Git
-
-### **Quick Start**
-
-1. **Clone & Install**
+**Option 2: Install via Package Manager**
 ```bash
+# Ubuntu/Debian
+wget [release-url]/linux-terminal-suite_0.1.0_amd64.deb
+sudo dpkg -i linux-terminal-suite_0.1.0_amd64.deb
+
+# Fedora/Red Hat
+wget [release-url]/linux-terminal-suite-0.1.0-1.x86_64.rpm
+sudo dnf install linux-terminal-suite-0.1.0-1.x86_64.rpm
+```
+
+### **🏗️ Build from Source (For Developers)**
+
+**Prerequisites:**
+```bash
+# Ubuntu/Debian
+sudo apt update && sudo apt install -y \
+  build-essential curl wget pkg-config \
+  libgtk-3-dev libwebkit2gtk-4.1-dev \
+  libayatana-appindicator3-dev librsvg2-dev patchelf
+
+# Fedora/RHEL  
+sudo dnf install -y gcc gcc-c++ make curl wget pkgconfig \
+  gtk3-devel webkit2gtk4.1-devel \
+  libappindicator-gtk3-devel librsvg2-devel patchelf
+```
+
+**Build Steps:**
+```bash
+# 1. Clone repository
 git clone https://github.com/AmanVatsSharma/Tauri-Linux-Terminal-Suite--LinuxGenius
 cd linux-terminal-suite
+
+# 2. Install dependencies
 npm install
+
+# 3. Install Rust (if not installed)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+
+# 4. Build application
+./scripts/build.sh
+# OR manually: npm run tauri build
+
+# 5. Install locally (optional)
+./scripts/install.sh
 ```
 
-2. **Development Mode**
-```bash
-npm run dev
-# Visit: http://localhost:1420
-```
-
-3. **Production Build**
-```bash
-npm run tauri build
-# Binary output: src-tauri/target/release/
-```
+**📦 Build Outputs:**
+- **Binary**: `src-tauri/target/release/linux-terminal-suite`
+- **AppImage**: `src-tauri/target/release/bundle/appimage/`
+- **Debian Package**: `src-tauri/target/release/bundle/deb/`
+- **RPM Package**: `src-tauri/target/release/bundle/rpm/`
 
 ---
 
