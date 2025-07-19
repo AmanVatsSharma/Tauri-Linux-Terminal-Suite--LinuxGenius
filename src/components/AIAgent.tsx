@@ -13,7 +13,6 @@ const AIAgent = ({ terminalOutput }: AIAgentProps) => {
   const [agent, setAgent] = useState<TerminalAgent | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lastCommand, setLastCommand] = useState<string>('');
-  const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
   
   const setupAgent = () => {
     if (apiKey) {
