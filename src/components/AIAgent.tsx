@@ -43,7 +43,6 @@ const AIAgent = ({ terminalOutput }: AIAgentProps) => {
       
       // Update history
       setLastCommand(commandText);
-      setTerminalHistory(prev => [...prev, terminalOutput]);
     }
   }, [terminalOutput, agent, isConfigured]);
 
