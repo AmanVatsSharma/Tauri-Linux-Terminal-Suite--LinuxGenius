@@ -3,7 +3,6 @@ import { Terminal as XTerminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import 'xterm/css/xterm.css';
 import { invoke } from '@tauri-apps/api/core';
-import { Command } from '@tauri-apps/plugin-process';
 
 interface TerminalProps {
   onOutput?: (output: string, command: string) => void;
